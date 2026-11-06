@@ -110,7 +110,7 @@ jobs:
             publish="$IN_PUBLISH"
             tag="$IN_TAG"
             abis=""
-            if [ "$IN_ARM64"  = "true" ]; then abis="$abis,arm64-v8a";   fi
+            if [ "$IN_ARM64"  = "true" ]; then abis="$abis,arm64-v8a";    fi
             if [ "$IN_ARMV7"  = "true" ]; then abis="$abis,armeabi-v7a"; fi
             if [ "$IN_X86_64" = "true" ]; then abis="$abis,x86_64";      fi
             if [ "$IN_X86"    = "true" ]; then abis="$abis,x86";         fi
@@ -183,7 +183,7 @@ jobs:
           java-version: "17"
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Install SDK platform, build tools and NDK
         run: |
