@@ -249,10 +249,13 @@ public class EditGsiActivity extends AppCompatActivity {
         PopupMenu popup = new PopupMenu(this, anchor);
         popup.getMenuInflater().inflate(R.menu.menu_workspace, popup.getMenu());
         popup.getMenu().findItem(R.id.action_repack).setEnabled(workspace.isReady());
+        popup.getMenu().findItem(R.id.action_inject_logger).setEnabled(workspace.isReady());
         popup.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.action_repack) {
                 showRepackDialog(workspace);
+            } else if (id == R.id.action_inject_logger) {
+                viewModel.injectBootLogger(workspace.getName());
             } else if (id == R.id.action_delete) {
                 showDeleteDialog(workspace);
             } else if (id == R.id.action_info) {

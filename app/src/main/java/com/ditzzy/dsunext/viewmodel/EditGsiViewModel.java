@@ -430,6 +430,27 @@ public final class EditGsiViewModel extends AndroidViewModel {
         });
     }
 
+    public void injectBootLogger(String name) {
+        io.execute(() -> {
+            IWorkspaceService s = service;
+            if (s == null) {
+                messages.postValue(new Event<>(new UiMessage(R.string.gsi_service_unavailable)));
+                return;
+            }
+            try {
+                boolean success = s.injectBootLogger(name);
+                if (success) {
+                    messages.postValue(new Event<>(new UiMessage(R.string.gsi_inject_boot_logger_success)));
+                } else {
+                    messages.postValue(new Event<>(new UiMessage(R.string.gsi_inject_boot_logger_failed)));
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Unable to inject boot logger.", e);
+                messages.postValue(new Event<>(new UiMessage(R.string.gsi_inject_boot_logger_failed)));
+            }
+        });
+    }
+
     /** Closes the dialog of a finished or failed job. */
     public void dismissOperation() {
         synchronized (operationLock) {

@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.ditzzy.dsunext.IWorkspaceCallback;
 import com.ditzzy.dsunext.IWorkspaceService;
+import com.ditzzy.dsunext.util.DsuBootLogReader;
+import com.ditzzy.dsunext.workspace.BootLoggerInjector;
 import com.ditzzy.dsunext.workspace.ImageImporter;
 import com.ditzzy.dsunext.workspace.ImageRepacker;
 import com.ditzzy.dsunext.workspace.JobReporter;
@@ -22,7 +24,6 @@ import java.util.concurrent.Executors;
  * one at a time on a worker thread and report back through the callback they were started with.
  */
 public final class WorkspaceService extends IWorkspaceService.Stub {
-
     private static final String TAG = "WorkspaceService";
 
     private interface Job {
@@ -97,6 +98,26 @@ public final class WorkspaceService extends IWorkspaceService.Stub {
             IWorkspaceCallback callback) {
         worker.execute(() -> execute(callback, target,
                 () -> OutputExporter.run(workspaceName, fileName, target, reporter(callback))));
+    }
+
+    @Override
+    public boolean injectBootLogger(String workspaceName) {
+        try {
+            return BootLoggerInjector.inject(workspaceName);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to inject boot logger for " + workspaceName, e);
+            return false;
+        }
+    }
+
+    @Override
+    public String readDsuBootLogs() {
+        try {
+            return DsuBootLogReader.readLogsJson();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to read DSU boot logs", e);
+            return "{\"has_logs\":false,\"status_message\":\"Error: " + e.getMessage() + "\"}";
+        }
     }
 
     private void execute(IWorkspaceCallback callback, ParcelFileDescriptor toClose, Job job) {

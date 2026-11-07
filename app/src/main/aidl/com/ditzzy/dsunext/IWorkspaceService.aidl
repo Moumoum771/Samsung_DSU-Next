@@ -26,4 +26,10 @@ interface IWorkspaceService {
     /** Copies a repacked image from the workspace into [target]. */
     void exportOutput(String workspaceName, String fileName, in ParcelFileDescriptor target,
             IWorkspaceCallback callback);
+
+    /** Injects the early boot logging scripts and init services into the unpacked GSI workspace. */
+    boolean injectBootLogger(String workspaceName);
+
+    /** Reads available DSU boot logs from guest userdata and pstore/ramoops. Returns JSON. */
+    String readDsuBootLogs();
 }

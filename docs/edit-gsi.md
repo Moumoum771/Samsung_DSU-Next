@@ -70,6 +70,11 @@ When the repack finishes, tap **Save…** and choose where to put the image. The
 
 Install the saved image from the home screen like any other GSI
 
+### Inject Early Boot Logger
+Tapping **Inject Early Boot Logger** in the workspace menu automatically injects an early-boot diagnostic service into the GSI (`/system/etc/init/dsu_boot_logger.rc` and `/system/bin/dsu_*.sh`) and registers their permissions in `fs_config` and `file_contexts`.
+
+When the GSI boots, it starts capturing `dmesg` and `logcat` as early as `post-fs` and `class core`. If the GSI crashes, bootloops, or boots successfully, the host app can read the logs from guest userdata and `/sys/fs/pstore/console-ramoops` under **Tools > DSU Boot Diagnostics**.
+
 ### Info and delete
 
 **Info** shows the file system, mount point, original and unpacked sizes, the number of files, folders and symlinks, block size, UUID, source file, import time and last repack. It also reads `build.prop` live for the Android version and API level, build ID and fingerprint, so your edits show up there. **Delete** removes the unpacked files from the device and cannot be undone.

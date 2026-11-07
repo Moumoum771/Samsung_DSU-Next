@@ -355,4 +355,26 @@
     <string name="gsi_info_block_size">Block size</string>
     <string name="gsi_info_uuid">UUID</string>
     <string name="gsi_info_repack">Last repack</string>
+    <!-- Early Boot Logger & Diagnostics -->
+    <string name="gsi_inject_boot_logger">Inject Early Boot Logger</string>
+    <string name="gsi_inject_boot_logger_success">Early Boot Logger injected! Repack your GSI to include it.</string>
+    <string name="gsi_inject_boot_logger_failed">Failed to inject Early Boot Logger into GSI.</string>
+    <string name="dsu_boot_logs_title">DSU Boot Diagnostics</string>
+    <string name="dsu_boot_logs_description">View early kernel, logcat, and crash logs from DSU boot</string>
+    <string name="dsu_boot_logs_scanning">Scanning for DSU boot logs…</string>
+    <string name="dsu_boot_logs_summary_hint">Connects to root service to extract guest userdata and kernel pstore.</string>
+    <string name="dsu_boot_logs_found">DSU Boot Logs Found</string>
+    <string name="dsu_boot_logs_not_found">No DSU Boot Logs Found</string>
+    <string name="dsu_boot_logs_root_required">Root permission is required to inspect DSU guest userdata and kernel crash buffers.</string>
+    <string name="dsu_boot_logs_refresh">Refresh</string>
+    <string name="dsu_boot_logs_export">Export All Logs</string>
+    <string name="dsu_boot_logs_copy">Copy</string>
+    <string name="dsu_boot_logs_copied">Logs copied to clipboard</string>
+    <string name="dsu_boot_logs_tab_logcat">Logcat</string>
+    <string name="dsu_boot_logs_tab_dmesg">Kernel (dmesg)</string>
+    <string name="dsu_boot_logs_tab_pstore">Crash / PStore</string>
+    <string name="dsu_boot_logs_tab_info">System Info</string>
+    <string name="dsu_boot_logs_filter_hint">Filter lines (e.g. fatal, audit, exception)</string>
+    <string name="dsu_boot_logs_empty">No log data available in this stream.</string>
+    <string name="dsu_boot_logs_no_matches">No log entries matching "%1$s"</string>
 </resources>
